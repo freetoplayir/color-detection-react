@@ -11,19 +11,22 @@ class App extends React.Component {
     super();
     this.state = {
       input: '',
+      imgUrl: ''
     }
   }
 
   onInputChange = e => {
-    console.log(e.target.value)
+    this.setState({input: e.target.value});
   }
   
   onBtnSubmit = () => {
-    console.log('click');
-    app.models.predict("eeed0b6733a644cea07cf4c60f87ebb7", "https://samples.clarifai.com/metro-north.jpg")
+    this.setState({ imgUrl: this.state.input });
+    app.models.predict(
+      Clarifai.COLOR_MODEL,
+      this.state.input)
     .then(
     function(response) {
-      console.log(response);
+      console.log(response.outputs[0].data.colors);
     },
     function(err) {
       // there was an error
@@ -38,7 +41,7 @@ class App extends React.Component {
         onInputChange={this.onInputChange} 
         onBtnSubmit={this.onBtnSubmit} />
 
-        <ColorDetection />
+        <ColorDetection imgUrl={this.state.imgUrl} />
 
       </div>
       

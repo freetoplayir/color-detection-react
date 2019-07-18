@@ -1,9 +1,9 @@
 import React from 'react';
 
-const ColorDetection = () => {
+const ColorDetection = ({ imgUrl }) => {
     return (
         <div>
-            <img alt='' src={"https://samples.clarifai.com/metro-north.jpg"}></img>
+            <img alt='' src={imgUrl} />
         </div>
     )
 }
